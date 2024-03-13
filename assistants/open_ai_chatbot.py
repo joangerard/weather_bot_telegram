@@ -75,4 +75,4 @@ class OpenAIChatbot():
         else:
             answer_from_api = message.content
         
-        return answer_from_api
+        return ' '.join(answer_from_api.split())
