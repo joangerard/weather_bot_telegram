@@ -45,7 +45,7 @@ class ChatAssistant():
             tools=self.tools
         )
 
-        print('debug: finish_reason', completion.choices[0].finish_reason)
+        # print('debug: finish_reason', completion.choices[0].finish_reason)
 
         return self._answer(completion.choices[0])
     
@@ -68,5 +68,7 @@ class ChatAssistant():
             temperature=self.temperature
         )
 
-        return completion.choices[0].message.content
+        assitant_message = completion.choices[0].message
+        self.messages.append(assitant_message)
+        return assitant_message.content
 

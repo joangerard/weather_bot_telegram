@@ -7,17 +7,17 @@ class LatLonAssistant():
         self.model = model
 
     def get_lat_long(self, location: str):
-        role = 'Vas a recibir una dirección y tu funcion es \
-                devolver las coordenadas terrestres de esta dirección: la latitud y longitud de \
-                dicha ciudad/pais en formato json.  \
-                Por ejemplo si recibes: cochabamba, bolivia deberías retornar: \
+        role = 'You are going to receive an address and your function is \
+                return the earth coordinates of this address: the latitude and longitude of \
+                said city/country in json format. \
+                For example if you receive: cochabamba, bolivia you should return: \
                 {\
                 "latitude": -17.3895,\
                 "longitude": -66.1568\
                 }\
                 \
-                No aumentar ninguna información extra\
-                en caso de que no conozcas dichas coordenadas puedes retornar un json como este:\
+                Do not add any extra information\
+                In case you don\'t know these coordinates, you can return a json like this:\
                 {\
                 "latitude": 0,\
                 "longitude": 0\
