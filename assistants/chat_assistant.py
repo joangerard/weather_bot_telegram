@@ -55,7 +55,7 @@ class ChatAssistant():
             "content": message
         })
 
-    def send_message_wo_func_exec(self, message) -> MessageType:
+    def send_message_wo_func_exec(self, message) -> str:
         self.messages.append({
             "role":"user", 
             "content": message

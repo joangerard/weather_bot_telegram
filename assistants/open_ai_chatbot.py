@@ -41,7 +41,7 @@ class OpenAIChatbot():
         ]
 
         self.weatherAPI = WeatherAPI()
-        self.assistant_bot = ChatAssistant(role=self.role, model=self.model, tools=self.tools)
+        self.chat_assistant = ChatAssistant(role=self.role, model=self.model, tools=self.tools)
         self.lat_lon_assistant = LatLonAssistant(self.model)
 
     def _get_weather_from_json(self, weather, units, location):
@@ -62,18 +62,16 @@ class OpenAIChatbot():
         return self._get_weather_from_json(weather=weather,units=units, location=location)
 
     def interact(self, msg):
-        message = self.assistant_bot.send_message(msg)
-        answer_from_api = ""
+        message = self.chat_assistant.send_message(msg)
+        answer_from_api = message.content
+
         if message.type == Type.FUNC_CALL:
             func = message.content
-            # continue_talking = False
-            # print('debug: func arg: ', func.arguments)
-            if func.name== 'get_current_weather':
+            if func.name == 'get_current_weather':
                 arg = json.loads(func.arguments)
                 answer = self._get_current_weather(arg["location"], arg["units"])
-                self.assistant_bot.add_context_as_assistant(answer)
                 answer_from_api = answer
-        else:
-            answer_from_api = message.content
-        
+
+        self.chat_assistant.add_context_as_assistant(answer_from_api)
+
         return ' '.join(answer_from_api.split())
